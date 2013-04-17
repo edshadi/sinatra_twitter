@@ -25,3 +25,4 @@ chromedriver.log
 bin/
 .env
 *.swp
+twitter.yml

@@ -20,10 +20,16 @@ require "sinatra/reloader" if development?
 
 require 'erb'
 
+require 'oauth'
+require 'twitter'
+
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 
 APP_NAME = APP_ROOT.basename.to_s
+TWITTER = YAML::load(File.open("#{APP_ROOT}/twitter.yml"))
+ENV['TWITTER_KEY'] = TWITTER['key']
+ENV['TWITTER_SECRET'] = TWITTER['secret']
 
 # Set up the controllers and helpers
 Dir[APP_ROOT.join('app', 'controllers', '*.rb')].each { |file| require file }
