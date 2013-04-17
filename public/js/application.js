@@ -1,7 +1,18 @@
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
-
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  $('form#tweet').on('submit', function(e) {
+    e.preventDefault();
+    $form = $(this);
+    $errorDiv = $form.find('.errors');
+    $.post($form.attr('action'), $form.serialize())
+      .done(function(data) {
+        $form.find('.errors').empty();
+        $('ul.tweets').append('<li>'+data.response+'</li>');
+      })
+      .error(function(data) {
+        $errorDiv.html(data.responseText)
+      })
+      .always(function() {
+        $form[0].reset();
+      });
+  });
 });
