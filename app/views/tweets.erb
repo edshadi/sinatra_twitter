@@ -1,0 +1,10 @@
+<form action="/tweet" method="post" id="tweet">
+  <div class="errors"></div>
+  <input type="text" name="tweet">
+  <input type="submit" name="submit">
+</form>
+<ul class="tweets">
+  <% @tweets.each do |tweet|%>
+    <li><%= tweet.text %></li>
+  <% end %>
+</ul>
